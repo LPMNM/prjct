@@ -44,15 +44,6 @@ class GoodsList {
         });
         document.querySelector(".goods-list").innerHTML = listHtml;
     }
-
-    // sum() {
-    //     let sumHtml = "";
-    //     let sum = 0;
-    //     this.goods.forEach(good => {
-    //         sum += good.price
-    //     });
-    //     document.querySelector("#basket").innerHTML = `Общая стоимость товаров ${sum} ед.`;
-    // }
 }
 
 class BasketItem {
@@ -84,10 +75,14 @@ class Basket {
 
     render() {
         let listHtml = "";
-        this.basket.forEach(basket => {
-            let basketItem = new GoodsItem(basket.img, basket.title, basket.description, basket.price, basket.id);
-            listHtml += basketItem.render();
-        });
+        if (this.basket.length === 0) {
+            listHtml = `<div>Корзина пуста</div>`;
+        } else {
+            this.basket.forEach(basket => {
+                let basketItem = new BasketItem(basket.img, basket.title, basket.description, basket.price, basket.id);
+                listHtml += basketItem.render();
+            });
+        }
         document.querySelector(".basket").innerHTML = listHtml;
     }
 }
@@ -123,6 +118,9 @@ list.fetchGoods(() => {
     list.render();
     // list.sum();
 });
+
+let basket = new Basket();
+basket.render();
 
 
 
