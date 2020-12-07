@@ -1,5 +1,3 @@
-let btn = document.querySelectorAll("buy");
-
 class GoodsItem {
     constructor(image, title, description, price, id) {
         this.id = id;
@@ -43,6 +41,16 @@ class GoodsList {
             listHtml += goodItem.render();
         });
         document.querySelector(".goods-list").innerHTML = listHtml;
+    }
+
+    productBtn() {
+        let btn = document.querySelectorAll('.buy');
+        btn.forEach(el => {
+            el.addEventListener('click', (eventBuy) => {
+                let productId = el.dataset.id;
+                return productId;
+            })
+        })
     }
 }
 
@@ -116,11 +124,12 @@ function makeGETRequest(url) {
 const list = new GoodsList();
 list.fetchGoods(() => {
     list.render();
-    // list.sum();
+    list.productBtn();
 });
 
 let basket = new Basket();
 basket.render();
+
 
 
 
