@@ -35,6 +35,7 @@ class GoodsList {
 
 }
 
+
 const list = new GoodsList();
 list.fetchGoods();
 list.render();
